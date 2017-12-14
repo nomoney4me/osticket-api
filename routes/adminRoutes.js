@@ -1,6 +1,16 @@
+require('dotenv').config()
+
 const express = require('express')
       , adminRoutes = express.Router()
-
+      , osticket = require('knex')({
+        client:'mysql',
+        connection: {
+          host: process.env.osticket_host,
+          user: process.env.osticket_user,
+          password: process.env.osticket_password,
+          database: process.env.osticket_db
+        }
+      })
 adminRoutes.get('/', (req, res) => {
   console.log('request accepted')
   res.send('welcome to the admin home page')
